@@ -37,14 +37,13 @@ Are two supported primary keys : 'AutoIncrement' or 'Guid'.
 
 ~~~
     var vehicleMapping = new SqlMappingConfiguration<VehicleEntity>();
-    
+    vehicleMapping.ToTable("Vehicle");
     vehicleMapping.HasProperty(x => x.Id).IsIdentity(KeyGenerator.AutoIncrement);
 ~~~
 
-Additionally library allows configure table and property names and number of element to generate.
+Additionally library allows configure properties names and number of element to generate.
 
 ~~~
-    vehicleMapping.ToTable("Vehicle");
     vehicleMapping.HasProperty(x => x.Mileage).ToColumn("MileageColumn");
     vehicleMapping.SetNumberOfElementsToGenerate(10);
 ~~~
