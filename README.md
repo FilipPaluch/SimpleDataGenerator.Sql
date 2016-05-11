@@ -33,7 +33,7 @@ This example illustrates the usage of the library based on simple database model
 ## Mapping
 
 Each entity has to has to have mapping configuration where primary key is defined.
-Are two possibilities to define primary key : 'AutoIncrement' or 'Guid'.
+Are two supported primary keys : 'AutoIncrement' or 'Guid'.
 
 ~~~
     var vehicleMapping = new SqlMappingConfiguration<VehicleEntity>();
