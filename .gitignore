@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Source/.nuget
+/Source/packages
+/Source/SimpleDataGenerator.IntegrationTests.Sql/bin/Debug
+/Source/SimpleDataGenerator.IntegrationTests.Sql/obj/Debug
+/Source/SimpleDataGenerator.Sql/bin/Debug
+/Source/SimpleDataGenerator.Sql/obj/Debug
+/Source/SimpleDataGenerator.Tests.Sql/bin/Debug
+/Source/SimpleDataGenerator.Tests.Sql/obj/Debug
