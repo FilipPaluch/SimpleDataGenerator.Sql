@@ -2,7 +2,7 @@
 
 SimpleDataGenerator.Sql is an open source library for .NET allow fill SQL Database tables with a larage amount of test data. Its primary goal is to allow developers testing database performance and scaling.  
 
-Nuget: https://www.nuget.org/packages/SimpleDataGenerator.Core/
+Nuget: https://www.nuget.org/packages/SimpleDataGenerator.Sql
 
 When writing application, usually you do not know how the system will be working with a large amount of data.
 SimpleDataGenerator.Sql makes it easier to test performance of applications before deployment to production. Among other features, it offers a possibility to configuration generated values, based on https://github.com/FilipPaluch/SimpleDataGenerator library.
