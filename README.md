@@ -37,6 +37,8 @@ This example illustrates the usage of the library based on simple database model
 Each entity has to has to have mapping configuration where primary key is defined.
 Are two supported primary keys : 'AutoIncrement' or 'Guid'.
 
+### Base
+
 ~~~
     var vehicleMapping = new SqlMappingConfiguration<VehicleEntity>();
     vehicleMapping.ToTable("Vehicle");
