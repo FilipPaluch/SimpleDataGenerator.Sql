@@ -14,9 +14,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGetPackages", "NuGetPacka
 		NuGetPackages\SimpleDataGenerator.Sql.nuspec = NuGetPackages\SimpleDataGenerator.Sql.nuspec
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2F09BF16-F148-4E61-BC33-362E65726B76}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{53B125E8-62FA-4BAE-B0FC-6A0651802EAE}"
 	ProjectSection(SolutionItems) = preProject
-		.nuget\packages.config = .nuget\packages.config
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
 Global
