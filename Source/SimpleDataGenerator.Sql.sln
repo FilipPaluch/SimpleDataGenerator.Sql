@@ -9,6 +9,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleDataGenerator.Sql", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleDataGenerator.IntegrationTests.Sql", "SimpleDataGenerator.IntegrationTests.Sql\SimpleDataGenerator.IntegrationTests.Sql.csproj", "{DA5F8896-A8CF-45F3-81F0-A8181DA2367A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NuGetPackages", "NuGetPackages", "{762C7AC8-E867-4EDB-8FA4-3E8EC5649AB9}"
+	ProjectSection(SolutionItems) = preProject
+		NuGetPackages\SimpleDataGenerator.Sql.nuspec = NuGetPackages\SimpleDataGenerator.Sql.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2F09BF16-F148-4E61-BC33-362E65726B76}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\packages.config = .nuget\packages.config
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

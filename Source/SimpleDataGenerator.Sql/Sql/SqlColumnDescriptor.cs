@@ -61,8 +61,8 @@ namespace SimpleDataGenerator.Sql.Sql
             var sqlColumnDescriptions = new List<SqlColumnDescription>();
             foreach (var associationConfiguration in _mappingConfiguration.AssociationPropertyConfigurations)
             {
-                var entityType = associationConfiguration.EntityType;
-                if (entityType.IsClass)
+                var entityType = associationConfiguration.SourceKeyProperty;
+                if (entityType.PropertyType.IsClass)
                 {
                     var associatedObject = associationConfiguration.SourceKeyProperty.GetValue(entity);
                     var value = associatedObject.GetType().GetProperty(associationConfiguration.AssociatedKeyProperty.Name).GetValue(associatedObject);
