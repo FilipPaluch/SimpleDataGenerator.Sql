@@ -69,17 +69,17 @@ Each association in entity has to be mapped. Are two possibilities to define ass
 
 ~~~
      vehicleMapping.HasAssociation(x => x.UserId)
-                   .HasConstraint<UserEntity>((vehicle, user) => vehicle.User.Id == user.Id)
+                   .HasConstraint<UserEntity>((vehicle, user) => vehicle.UserId == user.Id)
                    .ToColumn("UserId");
 ~~~
 
 ## Generation
 
-First step: SimpleSqlDataGenerator initialization
+First step: SimpleSqlDataGenerator initialization, ( db connection string has to be added to app.config )
 
 ~~~
 
-var generator = new SimpleSqlDataGenerator(dbConnectionString);
+var generator = new SimpleSqlDataGenerator(dbConnectionStringName);
 
 ~~~
 
