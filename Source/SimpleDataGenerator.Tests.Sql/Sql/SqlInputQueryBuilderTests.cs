@@ -52,12 +52,12 @@ namespace SimpleDataGenerator.Tests.Sql.Sql
                                  .Describe("Name", "TestName")
                                  .Describe("Kilometers", 100)
                                  .Describe("Age", 20)
-                                 .Describe("CreatedOn", new DateTime(2016, 02, 01)))
+                                 .Describe("CreatedOn", new DateTime(2016, 02, 01).ToString("d")))
                              .CreateSut();
 
             var expectedSqlQuery = "INSERT INTO [TestTable] " +
                                    "([Id],[Name],[Kilometers],[Age],[CreatedOn])" +
-                                   "VALUES ('7CDF1C94-1960-466D-9566-91BB4545A89F', 'TestName', '100', '20', '02.01.2016 00:00:00')";
+                                   "VALUES ('7CDF1C94-1960-466D-9566-91BB4545A89F', 'TestName', '100', '20', '2016-02-01')";
 
             //ACT
 
