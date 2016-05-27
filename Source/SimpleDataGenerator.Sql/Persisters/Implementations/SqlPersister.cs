@@ -61,16 +61,9 @@ namespace SimpleDataGenerator.Sql.Persisters.Implementations
 
         private object GenerateEntity()
         {
-            var dataGenerator = new SimpleTypePropertyAutoFixture<TEntity>();
-            dataGenerator.WithConfiguration(_entityConfiguration);
-            var entity = dataGenerator.Create();
+            var entity = CreateEntityWithFilledValueTypeProperties();
 
-            foreach (var associationConfiguration in _configuration.AssociationPropertyConfigurations)
-            {
-                var persister = _persisterProvider.Get(associationConfiguration.EntityType);
-                var generatedObject = persister.Store();
-                AssignAssociatedProperty(associationConfiguration, entity, generatedObject);
-            }
+            entity = FillAssociatedProperties(entity);
 
             var generatedId = StoreEntityToDatabase(entity);
 
@@ -81,27 +74,70 @@ namespace SimpleDataGenerator.Sql.Persisters.Implementations
             return entity;
         }
 
+        private TEntity FillAssociatedProperties(TEntity entity)
+        {
+            foreach (var associationConfiguration in _configuration.AssociationPropertyConfigurations)
+            {
+                var persister = _persisterProvider.Get(associationConfiguration.EntityType);
+                var generatedObject = persister.Store();
+                AssignAssociatedProperty(associationConfiguration, entity, generatedObject);
+            }
+
+            return entity;
+        }
+
+        private TEntity CreateEntityWithFilledValueTypeProperties()
+        {
+            var dataGenerator = new SimpleTypePropertyAutoFixture<TEntity>();
+            dataGenerator.WithConfiguration(_entityConfiguration);
+            return dataGenerator.Create();
+        }
+
         private void AssignIdForAutoIncrementProperty(int generatedId, TEntity entity)
         {
-            if (_configuration.PrimaryKeyProperty.Key == KeyGenerator.AutoIncrement)
+            if (IsAutoIncrementKey())
             {
                 var keyProperty = _configuration.PropertyConfigurations.First(x => x.Key == KeyGenerator.AutoIncrement);
                 keyProperty.SourcePropertyInfo.SetValue(entity, generatedId);
             }
         }
 
-        private void AssignAssociatedProperty(SqlAssociationPropertyConfigurationBase associationConfiguration, 
-            TEntity entity, 
-            object generatedObject)
+        private bool IsAutoIncrementKey()
         {
-            if (associationConfiguration.SourceKeyProperty.PropertyType.IsClass)
+            return _configuration.PrimaryKeyProperty.Key == KeyGenerator.AutoIncrement;
+        }
+
+        private void AssignAssociatedProperty(SqlAssociationPropertyConfigurationBase associationConfiguration, 
+            TEntity currentEntity, 
+            object generatedAssociatedEntity)
+        {
+            if (IsObjectAssociation(associationConfiguration))
             {
-                associationConfiguration.SourceKeyProperty.SetValue(entity, generatedObject);
+                AssignObjectRelation(associationConfiguration, currentEntity, generatedAssociatedEntity);
             }
             else
             {
-                associationConfiguration.SourceKeyProperty.SetValue(entity, associationConfiguration.AssociatedKeyProperty.GetValue(generatedObject));
+                //Key association
+                var keyValueFromAssociatedEntity = associationConfiguration.AssociatedKeyProperty.GetValue(generatedAssociatedEntity);
+                AssignKeyRelation(associationConfiguration, currentEntity, keyValueFromAssociatedEntity);
             }
+        }
+
+        private static void AssignKeyRelation(SqlAssociationPropertyConfigurationBase associationConfiguration,
+            TEntity currentEntity, object keyValueFromAssociatedEntity)
+        {
+            associationConfiguration.SourceKeyProperty.SetValue(currentEntity, keyValueFromAssociatedEntity);
+        }
+
+        private static void AssignObjectRelation(SqlAssociationPropertyConfigurationBase associationConfiguration,
+            TEntity currentEntity, object generatedAssociatedEntity)
+        {
+            associationConfiguration.SourceKeyProperty.SetValue(currentEntity, generatedAssociatedEntity);
+        }
+
+        private static bool IsObjectAssociation(SqlAssociationPropertyConfigurationBase associationConfiguration)
+        {
+            return associationConfiguration.SourceKeyProperty.PropertyType.IsClass;
         }
 
         private int StoreEntityToDatabase(TEntity entity)

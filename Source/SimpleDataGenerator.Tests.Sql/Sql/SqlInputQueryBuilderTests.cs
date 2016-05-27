@@ -52,7 +52,7 @@ namespace SimpleDataGenerator.Tests.Sql.Sql
                                  .Describe("Name", "TestName")
                                  .Describe("Kilometers", 100)
                                  .Describe("Age", 20)
-                                 .Describe("CreatedOn", new DateTime(2016, 02, 01).ToString("d")))
+                                 .Describe("CreatedOn", "2016-02-01"))
                              .CreateSut();
 
             var expectedSqlQuery = "INSERT INTO [TestTable] " +
