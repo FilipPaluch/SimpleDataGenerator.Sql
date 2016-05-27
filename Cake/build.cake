@@ -62,20 +62,20 @@ Task("Create-NuGet-Package")
     NuGetPack(nuGetPackSettings);
 });
 
-Task("Push-NuGet-Package")
-    .IsDependentOn("Create-NuGet-Package")
-    .Does(() =>
-{
-    var package = "../SimpleDataGenerator.Sql." + EnvironmentVariable("APPVEYOR_BUILD_VERSION") +".nupkg";
+ Task("Push-NuGet-Package")
+     .IsDependentOn("Create-NuGet-Package")
+     .Does(() =>
+ {
+     var package = "../SimpleDataGenerator.Sql." + EnvironmentVariable("APPVEYOR_BUILD_VERSION") +".nupkg";
                 
-    NuGetPush(package, new NuGetPushSettings {
-        Source = "https://nuget.org/",
-        ApiKey = EnvironmentVariable("NUGET_API_KEY")
-    });
-});
+     NuGetPush(package, new NuGetPushSettings {
+         Source = "https://nuget.org/",
+         ApiKey = EnvironmentVariable("NUGET_API_KEY")
+     });
+ });
 
 Task("Default")
-	.IsDependentOn("Push-NuGet-Package")
+	.IsDependentOn("Create-NuGet-Package")
     .Does(() =>
 {
     Information("SimpleDataGenerator.Sql building finished.");
