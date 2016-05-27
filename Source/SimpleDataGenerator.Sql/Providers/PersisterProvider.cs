@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SimpleDataGenerator.Core.Mapping.Implementations;
-using SimpleDataGenerator.Sql.Database.Interfaces;
+using SimpleDataGenerator.Sql.Database;
 using SimpleDataGenerator.Sql.Mapping;
 using SimpleDataGenerator.Sql.Persisters.Implementations;
 using SimpleDataGenerator.Sql.Persisters.Interfaces;
@@ -15,7 +15,8 @@ namespace SimpleDataGenerator.Sql.Providers
     public class PersisterProvider
     {
         private readonly List<ISqlPersister> _sqlPersisters = new List<ISqlPersister>();
-        public PersisterProvider(IEnumerable<SqlPersisterConfiguration> persisterConfigurations, IDatabaseContext databaseContext)
+        public PersisterProvider(IEnumerable<SqlPersisterConfiguration> persisterConfigurations, 
+            IDatabaseContext databaseContext)
         {
             foreach (var configuration in persisterConfigurations)
             {

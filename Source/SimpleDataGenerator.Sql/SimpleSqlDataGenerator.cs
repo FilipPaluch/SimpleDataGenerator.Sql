@@ -74,7 +74,7 @@ namespace SimpleDataGenerator.Sql
 
         private List<SqlPersisterConfiguration> CreatePersisterConfigurations()
         {
-            var persisterConfigurationCreator = new SqlPersisterConfigurationsCreator(_sqlMappingConfigurations, _entityConfigurations);
+            var persisterConfigurationCreator = new SqlPersisterConfigurationCreator(_sqlMappingConfigurations, _entityConfigurations);
             return persisterConfigurationCreator.Create().ToList();
         } 
 

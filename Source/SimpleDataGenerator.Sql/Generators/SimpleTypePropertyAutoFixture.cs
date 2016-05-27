@@ -43,6 +43,5 @@ namespace SimpleDataGenerator.Sql.Generators
 
             return _dataGenerator.Fixture.Create<TEntity>();
         }
-
     }
 }

@@ -7,6 +7,7 @@ using NUnit.Framework;
 using SimpleDataGenerator.Sql.Mapping;
 using SimpleDataGenerator.Sql.Mapping.AssociationProperty.Model;
 using SimpleDataGenerator.Sql.Sql;
+using SimpleDataGenerator.Sql.Sql.Descriptors;
 
 namespace SimpleDataGenerator.Tests.Sql.Sql
 {

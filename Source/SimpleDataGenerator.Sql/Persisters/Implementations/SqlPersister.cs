@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SimpleDataGenerator.Core.Mapping.Implementations;
+using SimpleDataGenerator.Sql.Cache;
 using SimpleDataGenerator.Sql.Cache.Implementations;
-using SimpleDataGenerator.Sql.Cache.Interfaces;
-using SimpleDataGenerator.Sql.Database.Interfaces;
+using SimpleDataGenerator.Sql.Database;
 using SimpleDataGenerator.Sql.Generators;
 using SimpleDataGenerator.Sql.Mapping;
 using SimpleDataGenerator.Sql.Mapping.AssociationProperty.Implementations;
@@ -16,6 +16,7 @@ using SimpleDataGenerator.Sql.Persisters.Model;
 using SimpleDataGenerator.Sql.Providers;
 using SimpleDataGenerator.Sql.Sql;
 using SimpleDataGenerator.Sql.Sql.Builders;
+using SimpleDataGenerator.Sql.Sql.Descriptors;
 
 namespace SimpleDataGenerator.Sql.Persisters.Implementations
 {
@@ -62,7 +63,6 @@ namespace SimpleDataGenerator.Sql.Persisters.Implementations
         {
             var dataGenerator = new SimpleTypePropertyAutoFixture<TEntity>();
             dataGenerator.WithConfiguration(_entityConfiguration);
-
             var entity = dataGenerator.Create();
 
             foreach (var associationConfiguration in _configuration.AssociationPropertyConfigurations)
@@ -90,7 +90,9 @@ namespace SimpleDataGenerator.Sql.Persisters.Implementations
             }
         }
 
-        private void AssignAssociatedProperty(SqlAssociationPropertyConfigurationBase associationConfiguration, TEntity entity, object generatedObject)
+        private void AssignAssociatedProperty(SqlAssociationPropertyConfigurationBase associationConfiguration, 
+            TEntity entity, 
+            object generatedObject)
         {
             if (associationConfiguration.SourceKeyProperty.PropertyType.IsClass)
             {
@@ -105,7 +107,7 @@ namespace SimpleDataGenerator.Sql.Persisters.Implementations
         private int StoreEntityToDatabase(TEntity entity)
         {
             var columnsDescriptor = new SqlColumnDescriptor<TEntity>(_configuration);
-            var columnsDescription = columnsDescriptor.Describe(entity);
+            var columnsDescription = columnsDescriptor.Describe(entity).ToList();
 
             var sqlQueryBuilder = new SqlInputQueryBuilder(columnsDescription, _configuration.TableName);
 

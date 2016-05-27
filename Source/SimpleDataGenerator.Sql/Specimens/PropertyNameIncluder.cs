@@ -36,11 +36,11 @@ namespace SimpleDataGenerator.Sql.Specimens
         {
             var propInfo = request as PropertyInfo;
 
-            if (propInfo == null) return new NoSpecimen(request);
+            if (propInfo == null) return new NoSpecimen();
 
             if (!_names.Contains(propInfo.Name)) return new OmitSpecimen();
 
-            return new NoSpecimen(request);
+            return new NoSpecimen();
 
         }
     }

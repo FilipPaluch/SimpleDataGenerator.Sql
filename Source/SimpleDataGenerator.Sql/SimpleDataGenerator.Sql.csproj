@@ -51,10 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Cache\Implementations\EntityCache.cs" />
-    <Compile Include="Cache\Interfaces\IEntityCache.cs" />
-    <Compile Include="Creators\SqlPersisterConfigurationsCreator.cs" />
+    <Compile Include="Cache\IEntityCache.cs" />
+    <Compile Include="Creators\SqlPersisterConfigurationCreator.cs" />
     <Compile Include="Database\Implementations\DatabaseContext.cs" />
-    <Compile Include="Database\Interfaces\IDatabaseContext.cs" />
+    <Compile Include="Database\IDatabaseContext.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Extensions\ExpressionExtensions.cs" />
     <Compile Include="Extensions\PetaPocoSqlExtensions.cs" />
@@ -83,7 +83,9 @@
     <Compile Include="SimpleSqlDataGenerator.cs" />
     <Compile Include="Specimens\PropertyNameIncluder.cs" />
     <Compile Include="Sql\Builders\SqlInputQueryBuilder.cs" />
-    <Compile Include="Sql\SqlColumnDescriptor.cs" />
+    <Compile Include="Sql\Descriptors\SqlAssociationColumnDescriptor.cs" />
+    <Compile Include="Sql\Descriptors\SqlValueTypeColumnDescriptor.cs" />
+    <Compile Include="Sql\Descriptors\SqlColumnDescriptor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

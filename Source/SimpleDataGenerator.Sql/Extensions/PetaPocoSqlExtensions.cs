@@ -30,15 +30,7 @@ namespace SimpleDataGenerator.Sql.Extensions
             var valuesSqlBuilder = PetaPoco.Sql.Builder;
             foreach (var value in values)
             {
-                if (value == null)
-                {
-                    valuesSqlBuilder.Append("null,");
-                }
-                else
-                {
-                    valuesSqlBuilder.Append(string.Format("'{0}',", value)); 
-                }
-                
+                valuesSqlBuilder.Append(value == null ? "null," : string.Format("'{0}',", value));
             }
 
             var result = valuesSqlBuilder.SQL;

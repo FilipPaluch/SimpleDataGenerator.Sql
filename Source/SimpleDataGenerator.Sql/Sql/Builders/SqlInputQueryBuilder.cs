@@ -19,9 +19,7 @@ namespace SimpleDataGenerator.Sql.Sql.Builders
             _tableName = tableName;
 
             if (_columnDescriptions.IsNullOrEmpty())
-            {
                 throw new InvalidOperationException(string.Format("Missing values to insert for table : {0}", tableName));
-            }
         }
 
 
